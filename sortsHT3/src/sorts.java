@@ -86,7 +86,7 @@ public class sorts {
 
     // Main function that sorts arr[l..r] using
     // merge()
-    public compare[] mergeSort(compare result[], int l, int r) {
+    public compare[] mergeSort(compare[] result, int l, int r) {
         if (l < r) {
             // Find the middle point
             int m = (l + r) / 2;
@@ -137,7 +137,7 @@ public class sorts {
       arr[] --> Array to be sorted,
       low  --> Starting index,
       high  --> Ending index */
-    public compare[] quickSort(compare result[], int low, int high)
+    public compare[] quickSort(compare[] result, int low, int high)
     {
         if (low < high)
         {
@@ -151,7 +151,7 @@ public class sorts {
         }return result;
     }
     // A utility function to get maximum value in arr[]
-    static int getMax(compare arr[], int n)
+    static int getMax(compare[] arr, int n)
     {
         int mx = arr[0].getX();
         for (int i = 1; i < n; i++)
@@ -162,7 +162,7 @@ public class sorts {
 
     // A function to do counting sort of arr[] according to
     // the digit represented by exp.
-    static void countSort(compare arr[], int n, int exp)
+    static void countSort(compare[] arr, int n, int exp)
     {
         compare output[] = new compare[n]; // output array
         int i;
@@ -193,16 +193,16 @@ public class sorts {
 
     // The main function to that sorts arr[] of size n using
     // Radix Sort
-    public compare[] radixsort(compare arr[], int n)
+    public compare[] radixsort(compare[] result, int n)
     {
         // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
+        int m = getMax(result, n);
 
         // Do counting sort for every digit. Note that instead
         // of passing digit number, exp is passed. exp is 10^i
         // where i is current digit number
         for (int exp = 1; m/exp > 0; exp *= 10)
-            countSort(arr, n, exp);
-        return arr;
+            countSort(result, n, exp);
+        return result;
     }
 }
