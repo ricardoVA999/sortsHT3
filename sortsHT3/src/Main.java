@@ -1,31 +1,28 @@
-import java.awt.*;
 import java.io.*;
-import java.util.Arrays;
 import java.util.Random;
-
+/**
+ * Nombre del archivo: sortsHT3
+ * Programa que ordena una lista de numeros de 0
+ * a 3000, haciendo uso de varios sorts
+ * @author Ricardo Valenzuela 18762   Jose Block 18935
+ */
 public class Main {
     public static void main(String[] args){
         compare[] listaNumeros = new compare[3000];
-        compare[] listaOrdenadaPorMerge = new compare[3000];
-        compare[] listaOrdenadaPorBubble = new compare[3000];
-        compare[] listaOrdenadaPorGnome = new compare[3000];
-        compare[] listaOrdenadaPorQuick = new compare[3000];
-        compare[] listaOrdenadaPorRadix = new compare[3000];
+        compare[] listaOrdenada = new compare[3000];
         WriteFile("./numeros.txt");
         listaNumeros = ReadFile("./numeros.txt");
         sorts mysorts = new sorts();
-        listaOrdenadaPorMerge= mysorts.mergeSort(listaNumeros,0,listaNumeros.length-1);
-        listaOrdenadaPorBubble= mysorts.bubble(listaNumeros);
-        listaOrdenadaPorGnome= mysorts.gnome(listaNumeros, listaNumeros.length);
-        listaOrdenadaPorQuick= mysorts.quickSort(listaNumeros,0,listaNumeros.length-1);
-        listaOrdenadaPorRadix= mysorts.radixsort(listaNumeros, listaNumeros.length);
-        /**
-         *         for(compare i: listaOrdenadaPorMerge){
-         *             System.out.println(i.getX());
-         *         }
-         */
+        listaOrdenada= mysorts.bubble(listaNumeros);
+        WriteSortFile("./SortedNumbers.txt", listaOrdenada);
     }
 
+
+    /**
+     * Funcion que lee un archivo e ingresa los datos en una lista de tipo compare
+     * @param fileName, nombre del archivo txt
+     * @return una lista de tipo compare
+     */
     private static compare[] ReadFile(String fileName){
 
         compare[] textNumbers =  new compare[3000];
@@ -48,7 +45,11 @@ public class Main {
         }
         return textNumbers;
     }
-
+    /**Funcion que excribe en un archivo 3000 numeros random
+     * de 0 a 3000
+     * Escribe en un archivo
+     * @param fileName, nombre del archivo
+     */
     private static void WriteFile(String fileName){
         try{
 
@@ -58,13 +59,36 @@ public class Main {
 
             Random randomNumbers = new Random();
             for (int i = 0; i <= 2999; i++) {
-                int num = randomNumbers.nextInt(3001); //generate a random number
-                bw.write("" + num ); //write the number to the file
+                int num = randomNumbers.nextInt(3001);
+                bw.write("" + num );
                 bw.newLine();
             }
-
             bw.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Funcion que escribe en un archivo los numeros
+     * ya ordenados de una lista de tipo compare
+     * @param fileName, nombre del archivo
+     * @param list, lista de tipo compare
+     */
+    private static void WriteSortFile(String fileName, compare[] list){
+        try{
+
+            File text = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(text);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+            for (compare i: list) {
+                int num = i.getX();
+                bw.write("" + num );
+                bw.newLine();
+            }
+            bw.close();
         }
         catch (IOException e)
         {

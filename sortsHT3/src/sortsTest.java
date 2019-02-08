@@ -1,7 +1,10 @@
 import junit.framework.TestCase;
 
 public class sortsTest extends TestCase {
-
+    /**
+     * JUnit que comprueba que se ordene
+     * una lista usando Radix Sort
+     */
     public void testRadix() {
         sorts pruebaSorts = new sorts();
         compare a = new compare();
@@ -19,6 +22,11 @@ public class sortsTest extends TestCase {
         int resutl=listaNumeros[3].getX();
         assertEquals(40, resutl);
     }
+
+    /**
+     * JUnit que comprueba que se ordene
+     * una lista usando Bubble Sort
+     */
     public void testBubble() {
         sorts pruebaSorts = new sorts();
         compare a = new compare();
@@ -36,6 +44,11 @@ public class sortsTest extends TestCase {
         int resutl=listaNumeros[2].getX();
         assertEquals(35, resutl);
     }
+
+    /**
+     * JUnit que comprueba que se ordene
+     * una lista usando Merge Sort
+     */
     public void testMergeSort() {
         sorts pruebaSorts = new sorts();
         compare a = new compare();
@@ -53,6 +66,11 @@ public class sortsTest extends TestCase {
         int resutl=listaNumeros[4].getX();
         assertEquals(99, resutl);
     }
+
+    /**
+     * JUnit que comprueba que se ordene
+     * una lista usando Gnome Sort
+     */
     public void testGnome() {
         sorts pruebaSorts = new sorts();
         compare a = new compare();
@@ -70,6 +88,11 @@ public class sortsTest extends TestCase {
         int resutl=listaNumeros[1].getX();
         assertEquals(22, resutl);
     }
+
+    /**
+     * JUnit que comprueba que se ordene
+     * una lista usando Quick Sort
+     */
     public void testQuickSort() {
         sorts pruebaSorts = new sorts();
         compare a = new compare();

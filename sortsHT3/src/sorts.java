@@ -3,6 +3,12 @@ import java.util.Arrays;
 public class sorts {
     public compare comparar = new compare();
 
+    /**
+     * Metodo para el Gnome sort
+     * @param result, una lista de tipo compare
+     * @param n, el tamaño de la lista
+     * @return result, la lista ordenada
+     */
     public compare[] gnome(compare[] result,int n) {
         int i = 1;
         while (i < n) {
@@ -20,6 +26,12 @@ public class sorts {
         }return result;
     }
 
+
+    /**
+     * Metodo para el Bubble sort
+     * @param result, una lista de tipo compare
+     * @return result, la lista ordenada
+     */
     public compare[] bubble(compare[] result) {
         int n = result.length;
         for (int i = 0; i < n - 1; i++) {
@@ -34,6 +46,15 @@ public class sorts {
         return result;
     }
 
+
+    /**
+     *Unifica y ordena dos partes del array
+     * @param result, una lista de tipo compare
+     * @param l, el inicio de la lista
+     * @param m, el punto medio de la lista
+     * @param r, el indice final de la lista
+     * @return
+     */
     private compare[] merge(compare[] result, int l, int m, int r) {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -84,8 +105,13 @@ public class sorts {
         return result;
     }
 
-    // Main function that sorts arr[l..r] using
-    // merge()
+    /**
+     * Funcion principal que ordena el array haciendo uso de merge
+     * @param result, una lista de compare
+     * @param l, el indice de inicio de la lista
+     * @param r, el indice final de la lista
+     * @return la lista ordenada
+     */
     public compare[] mergeSort(compare[] result, int l, int r) {
         if (l < r) {
             // Find the middle point
@@ -100,12 +126,18 @@ public class sorts {
         }
         return result;
     }
-    /* This function takes last element as pivot,
-       places the pivot element at its correct
-       position in sorted array, and places all
-       smaller (smaller than pivot) to left of
-       pivot and all greater elements to right
-       of pivot */
+
+
+    /**
+     * Funcion que toma el ultimo elemento como pivote, lo coloca
+     * en la posicion correcta, y coloca todos los mas pequeños que
+     * el pivote antes de el pivote, y todos los mas grandes depues
+     * del pivote
+     * @param result, una lista de tipo compare
+     * @param low, el indice de inicio de la lista
+     * @param high, el indice final de la lista
+     * @return el indice de un elemento mas grande
+     */
     private int partition(compare[] result, int low, int high) {
         compare pivot = result[high];
         int i = (low-1); // index of smaller element
@@ -131,12 +163,13 @@ public class sorts {
 
         return i+1;
     }
-
-
-    /* The main function that implements QuickSort()
-      arr[] --> Array to be sorted,
-      low  --> Starting index,
-      high  --> Ending index */
+    /**
+     * La funcion principal que implementa partition
+     * @param result, una lista de tipo compare
+     * @param low, el indice de inicio de la lista
+     * @param high, el indice final de la lista
+     * @return la lista ordenada
+     */
     public compare[] quickSort(compare[] result, int low, int high)
     {
         if (low < high)
@@ -150,19 +183,30 @@ public class sorts {
             quickSort(result, pi+1, high);
         }return result;
     }
-    // A utility function to get maximum value in arr[]
-    static int getMax(compare[] arr, int n)
+
+
+    /**
+     * Funcion que obtiene el valor mas alto del array
+     * @param result, lista de tipo compare
+     * @param n, el largo de la lista
+     * @return mx, el valor mas alto de la lista
+     */
+    private int getMax(compare[] result, int n)
     {
-        int mx = arr[0].getX();
+        int mx = result[0].getX();
         for (int i = 1; i < n; i++)
-            if (arr[i].getX() > mx)
-                mx = arr[i].getX();
+            if (result[i].getX() > mx)
+                mx = result[i].getX();
         return mx;
     }
-
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
-    static void countSort(compare[] arr, int n, int exp)
+    /**
+     * Funcion para hacer el conteo dependiendo
+     * del exponencial
+     * @param result, una lista de tipo compare
+     * @param n, largo de la lista
+     * @param exp, exponente
+     */
+    private void countSort(compare[] result, int n, int exp)
     {
         compare output[] = new compare[n]; // output array
         int i;
@@ -171,7 +215,7 @@ public class sorts {
 
         // Store count of occurrences in count[]
         for (i = 0; i < n; i++)
-            count[ (arr[i].getX()/exp)%10 ]++;
+            count[ (result[i].getX()/exp)%10 ]++;
 
         // Change count[i] so that count[i] now contains
         // actual position of this digit in output[]
@@ -181,18 +225,22 @@ public class sorts {
         // Build the output array
         for (i = n - 1; i >= 0; i--)
         {
-            output[count[ (arr[i].getX()/exp)%10 ] - 1] = arr[i];
-            count[ (arr[i].getX()/exp)%10 ]--;
+            output[count[ (result[i].getX()/exp)%10 ] - 1] = result[i];
+            count[ (result[i].getX()/exp)%10 ]--;
         }
 
         // Copy the output array to arr[], so that arr[] now
         // contains sorted numbers according to curent digit
         for (i = 0; i < n; i++)
-            arr[i] = output[i];
+            result[i] = output[i];
     }
-
-    // The main function to that sorts arr[] of size n using
-    // Radix Sort
+    /**
+     * La funcion principal que ordena el array, haciendo
+     * uso de get max, countSort
+     * @param result, una lista de tipo compare
+     * @param n, largo de la lista
+     * @return la lista ordenada
+     */
     public compare[] radixsort(compare[] result, int n)
     {
         // Find the maximum number to know number of digits
