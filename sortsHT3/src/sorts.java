@@ -3,43 +3,29 @@ import java.util.Arrays;
 public class sorts {
     public compare comparar = new compare();
 
-    public int[] gnome(int[] result) {
-        compare va1 = new compare();
-        compare va2 = new compare();
-
-        for (int i = 1; i <= result.length; ) {
-            va1.setX(result[i]);
-            va2.setX(result[i - 1]);
-
-            if (va1.compareTo(va2) < 0)
-                ++i;
-
+    public compare[] gnome(compare[] result,int n) {
+        int i = 1;
+        while (i < n) {
+            if (i == 0)
+                i++;
+            if (result[i].compareTo(result[i-1]) >= 0)
+                i++;
             else {
-
-                int tempValue = result[i];
+                compare temp = new compare();
+                temp = result[i];
                 result[i] = result[i - 1];
-                result[i - 1] = tempValue;
-                --i;
-
-                if (i == 0)
-                    i = 1;
-
+                result[i - 1] = temp;
+                i--;
             }
-        }
-        return result;
+        }return result;
     }
 
-    public int[] bubble(int[] result) {
+    public compare[] bubble(compare[] result) {
         int n = result.length;
-        compare va1 = new compare();
-        compare va2 = new compare();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                va1.setX(result[j]);
-                va2.setX(result[j + 1]);
-
-                if (va1.compareTo(va2) > 0) {
-                    int temp = result[j];
+                if (result[j].compareTo(result[j+1]) > 0) {
+                    compare temp = result[j];
                     result[j] = result[j + 1];
                     result[j + 1] = temp;
                 }
@@ -48,14 +34,14 @@ public class sorts {
         return result;
     }
 
-    private int[] merge(int[] result, int l, int m, int r) {
+    private compare[] merge(compare[] result, int l, int m, int r) {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
 
         /* Create temp arrays */
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        compare L[] = new compare[n1];
+        compare R[] = new compare[n2];
 
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i)
@@ -72,11 +58,7 @@ public class sorts {
         // Initial index of merged subarry array
         int k = l;
         while (i < n1 && j < n2) {
-            compare va1 = new compare();
-            compare va2 = new compare();
-            va1.setX(L[i]);
-            va2.setX(R[j]);
-            if (va1.compareTo(va2) <= 0) {
+            if (L[i].compareTo(R[j]) <= 0) {
                 result[k] = L[i];
                 i++;
             } else {
@@ -104,7 +86,7 @@ public class sorts {
 
     // Main function that sorts arr[l..r] using
     // merge()
-    public int[] mergeSort(int result[], int l, int r) {
+    public compare[] mergeSort(compare result[], int l, int r) {
         if (l < r) {
             // Find the middle point
             int m = (l + r) / 2;
@@ -124,30 +106,26 @@ public class sorts {
        smaller (smaller than pivot) to left of
        pivot and all greater elements to right
        of pivot */
-    private int partition(int result[], int low, int high) {
-        int pivot = result[high];
+    private int partition(compare[] result, int low, int high) {
+        compare pivot = result[high];
         int i = (low-1); // index of smaller element
         for (int j=low; j<high; j++)
         {
-            compare va1 = new compare();
-            compare va2 = new compare();
-            va1.setX(result[j]);
-            va2.setX(pivot);
             // If current element is smaller than or
             // equal to pivot
-            if (va1.compareTo(va2) <= 0)
+            if (result[j].compareTo(pivot) <= 0)
             {
                 i++;
 
                 // swap arr[i] and arr[j]
-                int temp = result[i];
+                compare temp = result[i];
                 result[i] = result[j];
                 result [j] = temp;
             }
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
-        int temp = result[i+1];
+        compare temp = result[i+1];
         result[i+1] = result[high];
         result[high] = temp;
 
@@ -159,41 +137,41 @@ public class sorts {
       arr[] --> Array to be sorted,
       low  --> Starting index,
       high  --> Ending index */
-    public int[] quickSort(int arr[], int low, int high)
+    public compare[] quickSort(compare result[], int low, int high)
     {
         if (low < high)
         {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-            int pi = partition(arr, low, high);
+            int pi = partition(result, low, high);
             // Recursively sort elements before
             // partition and after partition
-            quickSort(arr, low, pi-1);
-            quickSort(arr, pi+1, high);
-        }return arr;
+            quickSort(result, low, pi-1);
+            quickSort(result, pi+1, high);
+        }return result;
     }
     // A utility function to get maximum value in arr[]
-    static int getMax(int arr[], int n)
+    static int getMax(compare arr[], int n)
     {
-        int mx = arr[0];
+        int mx = arr[0].getX();
         for (int i = 1; i < n; i++)
-            if (arr[i] > mx)
-                mx = arr[i];
+            if (arr[i].getX() > mx)
+                mx = arr[i].getX();
         return mx;
     }
 
     // A function to do counting sort of arr[] according to
     // the digit represented by exp.
-    static void countSort(int arr[], int n, int exp)
+    static void countSort(compare arr[], int n, int exp)
     {
-        int output[] = new int[n]; // output array
+        compare output[] = new compare[n]; // output array
         int i;
         int count[] = new int[10];
         Arrays.fill(count,0);
 
         // Store count of occurrences in count[]
         for (i = 0; i < n; i++)
-            count[ (arr[i]/exp)%10 ]++;
+            count[ (arr[i].getX()/exp)%10 ]++;
 
         // Change count[i] so that count[i] now contains
         // actual position of this digit in output[]
@@ -203,8 +181,8 @@ public class sorts {
         // Build the output array
         for (i = n - 1; i >= 0; i--)
         {
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i];
-            count[ (arr[i]/exp)%10 ]--;
+            output[count[ (arr[i].getX()/exp)%10 ] - 1] = arr[i];
+            count[ (arr[i].getX()/exp)%10 ]--;
         }
 
         // Copy the output array to arr[], so that arr[] now
@@ -215,7 +193,7 @@ public class sorts {
 
     // The main function to that sorts arr[] of size n using
     // Radix Sort
-    public int[] radixsort(int arr[], int n)
+    public compare[] radixsort(compare arr[], int n)
     {
         // Find the maximum number to know number of digits
         int m = getMax(arr, n);

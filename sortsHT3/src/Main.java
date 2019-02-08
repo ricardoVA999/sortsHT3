@@ -5,30 +5,30 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args){
-        int[] listaNumeros = new int[3000];
-        int[] listaOrdenadaPorMerge = new int[3000];
-        int[] listaOrdenadaPorBubble = new int[3000];
-        int[] listaOrdenadaPorGnome = new int[3000];
-        int[] listaOrdenadaPorQuick = new int[3000];
-        int[] listaOrdenadaPorRadix = new int[3000];
+        compare[] listaNumeros = new compare[3000];
+        compare[] listaOrdenadaPorMerge = new compare[3000];
+        compare[] listaOrdenadaPorBubble = new compare[3000];
+        compare[] listaOrdenadaPorGnome = new compare[3000];
+        compare[] listaOrdenadaPorQuick = new compare[3000];
+        compare[] listaOrdenadaPorRadix = new compare[3000];
         WriteFile("./numeros.txt");
         listaNumeros = ReadFile("./numeros.txt");
         sorts mysorts = new sorts();
         listaOrdenadaPorMerge= mysorts.mergeSort(listaNumeros,0,listaNumeros.length-1);
-        System.out.println(Arrays.toString(listaOrdenadaPorMerge));
         listaOrdenadaPorBubble= mysorts.bubble(listaNumeros);
-        System.out.println(Arrays.toString(listaOrdenadaPorBubble));
+        listaOrdenadaPorGnome= mysorts.gnome(listaNumeros, listaNumeros.length-1);
         listaOrdenadaPorQuick= mysorts.quickSort(listaNumeros,0,listaNumeros.length-1);
-        System.out.println(Arrays.toString(listaOrdenadaPorQuick));
-        listaOrdenadaPorRadix= mysorts.radixsort(listaNumeros,listaNumeros.length-1);
-        System.out.println(Arrays.toString(listaOrdenadaPorRadix));
-        listaOrdenadaPorGnome= mysorts.gnome(listaNumeros);
-        System.out.println(Arrays.toString(listaOrdenadaPorGnome));
+        listaOrdenadaPorRadix= mysorts.radixsort(listaNumeros, listaNumeros.length-1);
+        /**
+         *         for(compare i: listaOrdenadaPorMerge){
+         *             System.out.println(i.getX());
+         *         }
+         */
     }
 
-    private static int[] ReadFile(String fileName){
+    private static compare[] ReadFile(String fileName){
 
-        int[] textNumbers =  new int[3000];
+        compare[] textNumbers =  new compare[3000];
 
         try {
             FileReader fileReader = new FileReader(fileName);
@@ -37,7 +37,9 @@ public class Main {
             String line = bufferedReader.readLine();
             int i = 0;
             while (line != null){
-                textNumbers[i]=Integer.parseInt(line);
+                compare ln = new compare();
+                ln.setX(Integer.parseInt(line));
+                textNumbers[i]=ln;
                 line = bufferedReader.readLine();
                 i++;
             }
@@ -56,7 +58,7 @@ public class Main {
 
             Random randomNumbers = new Random();
             for (int i = 0; i <= 2999; i++) {
-                int num = randomNumbers.nextInt(3000); //generate a random number
+                int num = randomNumbers.nextInt(3001); //generate a random number
                 bw.write("" + num ); //write the number to the file
                 bw.newLine();
             }

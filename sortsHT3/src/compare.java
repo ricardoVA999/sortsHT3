@@ -15,4 +15,8 @@ public class compare implements Comparable<compare> {
     public void setX(int x) {
         this.x = x;
     }
+
+    public int getX() {
+        return x;
+    }
 }
