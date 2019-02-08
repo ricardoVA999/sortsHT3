@@ -12,4 +12,7 @@ public class compare implements Comparable<compare> {
         }
         return resultado;
     }
+    public void setX(int x) {
+        this.x = x;
+    }
 }
