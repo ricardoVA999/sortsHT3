@@ -16,9 +16,9 @@ public class Main {
         sorts mysorts = new sorts();
         listaOrdenadaPorMerge= mysorts.mergeSort(listaNumeros,0,listaNumeros.length-1);
         listaOrdenadaPorBubble= mysorts.bubble(listaNumeros);
-        listaOrdenadaPorGnome= mysorts.gnome(listaNumeros, listaNumeros.length-1);
+        listaOrdenadaPorGnome= mysorts.gnome(listaNumeros, listaNumeros.length);
         listaOrdenadaPorQuick= mysorts.quickSort(listaNumeros,0,listaNumeros.length-1);
-        listaOrdenadaPorRadix= mysorts.radixsort(listaNumeros, listaNumeros.length-1);
+        listaOrdenadaPorRadix= mysorts.radixsort(listaNumeros, listaNumeros.length);
         /**
          *         for(compare i: listaOrdenadaPorMerge){
          *             System.out.println(i.getX());
